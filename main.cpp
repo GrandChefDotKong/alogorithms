@@ -1,5 +1,6 @@
 #include <iostream>
 #include "buble_sort.h"
+#include "insertion_sort.h"
 
 void print_array(const int arrayToPrint[], const int size) {
   std::cout << "array : ";
@@ -15,7 +16,7 @@ int main() {
 
   print_array(testArray, size);
 
-  buble_sort(testArray, size);
+  insertion_sort(testArray, size);
   print_array(testArray, size);
 
   return EXIT_SUCCESS;
