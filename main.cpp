@@ -1,6 +1,4 @@
 #include <iostream>
-#include "buble_sort.h"
-#include "insertion_sort.h"
 #include "sorting.hpp"
 
 void print_array(const int arrayToPrint[], const int size) {
@@ -17,7 +15,7 @@ int main() {
 
   print_array(testArray, size);
 
-  selection_sort(testArray, size);
+  merge_sort(testArray, 0, 8);
   print_array(testArray, size);
 
   return EXIT_SUCCESS;
