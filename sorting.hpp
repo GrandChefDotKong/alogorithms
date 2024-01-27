@@ -1,3 +1,47 @@
+/** UTILITY FUNCTION **/
+void swap_value(int array[], const int firstIndex, const int secondIndex);
+
+/**************************/
+/** QUICK SORT ALOGOITHM **/
+/**************************/
+int partition(int array[], const int begin, const int end);
+void quick_sort(int unsortedArray[], const int begin, const int end) {
+  if(begin >= end ) {
+    return;
+  }
+
+  int mid = partition(unsortedArray, begin, end); 
+
+  quick_sort(unsortedArray, begin, mid-1);
+  quick_sort(unsortedArray, mid+1, end);
+}
+
+int partition(int array[], const int begin, const int end) {
+  int pivot = array[end];
+  int i = begin;
+
+  for(int j = begin; j <= end; ++j) {
+    if(array[j] >= pivot) {
+      continue;
+    }
+
+    if(i != j) {
+      swap_value(array, i, j);
+    }
+
+    ++i;
+  }
+
+  if(i != end) {
+    swap_value(array, i, end);
+  }
+
+  return i;
+}
+
+/**************************/
+/** MERGE SORT ALOGOITHM **/
+/**************************/
 void merge(int array[], const int left, const int right, const int mid);
 
 void merge_sort(int unsortedArray[], const int begin, const int end) {
@@ -54,6 +98,9 @@ void merge(int array[], const int left, const int mid, const int right) {
   delete[] rightArray;
 }
 
+/******************************/
+/** SELECTION SORT ALOGOITHM **/
+/******************************/
 void selection_sort(int unsortedArray[], const int size) {
   for(int i(0); i < size - 1; ++i) {
     
@@ -68,12 +115,13 @@ void selection_sort(int unsortedArray[], const int size) {
       continue;
     }
 
-    int tempValue = unsortedArray[minimumValueIndex];
-    unsortedArray[minimumValueIndex] = unsortedArray[i];
-    unsortedArray[i] = tempValue; 
+    swap_value(unsortedArray, minimumValueIndex, i);
   }
 }
 
+/******************************/
+/** INSERTION SORT ALOGOITHM **/
+/******************************/
 void insertion_sort(int unsortedArray[], const int size) {
  for (int i = 0; i < size; ++i) {
   int temp = unsortedArray[i];
@@ -88,14 +136,24 @@ void insertion_sort(int unsortedArray[], const int size) {
  }  
 }
 
+/**************************/
+/** BUBLE SORT ALOGOITHM **/
+/**************************/
 void buble_sort(int* unsortedArray, const int size) {
   for (int i = 0; i < size - 1; ++i) {
     for(int j = 0; j < size - i - 1; ++j) {
       if(unsortedArray[j] > unsortedArray[j+1]) {
-        int temp = unsortedArray[j];
-        unsortedArray[j] = unsortedArray[j+1];
-        unsortedArray[j+1] = temp;
+        swap_value(unsortedArray, j, j+1);
       }
     }
   }
+}
+
+/**********************/
+/** SWAP ARRAY VALUE **/
+/**********************/
+void swap_value(int array[], const int firstIndex, const int secondIndex) {
+  int temp = array[firstIndex];
+  array[firstIndex] = array[secondIndex];
+  array[secondIndex] = temp;
 }

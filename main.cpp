@@ -15,7 +15,8 @@ int main() {
 
   print_array(testArray, size);
 
-  merge_sort(testArray, 0, 8);
+  //selection_sort(testArray, 9);
+  quick_sort(testArray, 0, 8);
   print_array(testArray, size);
 
   return EXIT_SUCCESS;
