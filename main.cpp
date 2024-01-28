@@ -1,5 +1,6 @@
 #include <iostream>
 #include "sorting.hpp"
+#include "search.hpp"
 
 void print_array(const int arrayToPrint[], const int size) {
   std::cout << "array : ";
@@ -10,15 +11,19 @@ void print_array(const int arrayToPrint[], const int size) {
 }
 
 int main() {
-  int testArray[9] = {69, 11, 43, 54, 22, 18, 98, 96, 5};
+  int testArray[7] = {11, 25, 43, 54, 68, 76, 95};
   const int size = sizeof(testArray)/sizeof(testArray[0]);
 
   print_array(testArray, size);
 
+  int result = binary_search(testArray, 7, 11);
+
+  std::cout << "result = " << result << "\n";
+
   //selection_sort(testArray, 9);
   //quick_sort(testArray, 0, 8);
-  radix_sort(testArray, 9);
-  print_array(testArray, size);
+  //radix_sort(testArray, 9);
+  //print_array(testArray, size);
 
   return EXIT_SUCCESS;
 }
