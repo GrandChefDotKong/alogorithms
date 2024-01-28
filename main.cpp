@@ -16,7 +16,8 @@ int main() {
   print_array(testArray, size);
 
   //selection_sort(testArray, 9);
-  quick_sort(testArray, 0, 8);
+  //quick_sort(testArray, 0, 8);
+  radix_sort(testArray, 9);
   print_array(testArray, size);
 
   return EXIT_SUCCESS;

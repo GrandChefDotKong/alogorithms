@@ -1,8 +1,71 @@
 /** UTILITY FUNCTION **/
 void swap_value(int array[], const int firstIndex, const int secondIndex);
+int max_value(const int array[], const int size);
 
 /**************************/
-/** QUICK SORT ALOGOITHM **/
+/** RADIX SORT ALGORYTHM **/
+/**************************/
+void digit_counting_sort(int inputArray[], const int size, const int digit);
+void radix_sort(int unsortedArray[], const int size) {
+  int maxValue = max_value(unsortedArray, size);
+
+  for(int i = 1; maxValue/i > 0; i *=10) {
+    digit_counting_sort(unsortedArray, size, i);
+  }
+} 
+
+void digit_counting_sort(int inputArray[], const int size, const int digit) {
+  int i = 0;
+  int countArray[10] = {0};
+  int outputArray[size] = {0};
+
+  for(int i = 0; i < size; ++i) {
+    countArray[(inputArray[i]/digit)%10]++;
+  }
+
+  for(int i = 1; i < 10; ++i) {
+    countArray[i] += countArray[i-1];
+  }
+
+  for(int i = size-1; i >= 0; --i) {
+    outputArray[countArray[(inputArray[i]/digit)%10]-1] = inputArray[i];
+    countArray[(inputArray[i]/digit)%10]--;
+  }
+  
+  for(int i = 0; i < size; ++i) {
+    inputArray[i] = outputArray[i];
+  }
+}
+
+/*****************************/
+/** COUNTING SORT ALGORYTHM **/
+/*****************************/
+void counting_sort(int inputArray[], const int size) {
+  
+  int maxValue = max_value(inputArray, size);
+  int countArray[maxValue+1] = {0};
+  int outputArray[size] = {0};
+
+  for(int i = 0; i < size; ++i) {
+    countArray[inputArray[i]]++;
+  }
+
+  for(int i = 1; i < maxValue+1; ++i) {
+    countArray[i] += countArray[i-1];
+  }
+
+  for(int i = size-1; i >= 0; --i) {
+    outputArray[countArray[inputArray[i]]-1] = inputArray[i];
+    countArray[inputArray[i]]--;
+  }
+  
+  for(int i = 0; i < size; ++i) {
+    inputArray[i] = outputArray[i];
+  }
+}
+
+/**************************/
+/** QUICK SORT ALGORYTHM **/
 /**************************/
 int partition(int array[], const int begin, const int end);
 void quick_sort(int unsortedArray[], const int begin, const int end) {
@@ -40,7 +103,7 @@ int partition(int array[], const int begin, const int end) {
 }
 
 /**************************/
-/** MERGE SORT ALOGOITHM **/
+/** MERGE SORT ALGORYTHM **/
 /**************************/
 void merge(int array[], const int left, const int right, const int mid);
 
@@ -99,7 +162,7 @@ void merge(int array[], const int left, const int mid, const int right) {
 }
 
 /******************************/
-/** SELECTION SORT ALOGOITHM **/
+/** SELECTION SORT ALGORYTHM **/
 /******************************/
 void selection_sort(int unsortedArray[], const int size) {
   for(int i(0); i < size - 1; ++i) {
@@ -120,7 +183,7 @@ void selection_sort(int unsortedArray[], const int size) {
 }
 
 /******************************/
-/** INSERTION SORT ALOGOITHM **/
+/** INSERTION SORT ALGORYTHM **/
 /******************************/
 void insertion_sort(int unsortedArray[], const int size) {
  for (int i = 0; i < size; ++i) {
@@ -137,7 +200,7 @@ void insertion_sort(int unsortedArray[], const int size) {
 }
 
 /**************************/
-/** BUBLE SORT ALOGOITHM **/
+/** BUBLE SORT ALGORYTHM **/
 /**************************/
 void buble_sort(int* unsortedArray, const int size) {
   for (int i = 0; i < size - 1; ++i) {
@@ -156,4 +219,18 @@ void swap_value(int array[], const int firstIndex, const int secondIndex) {
   int temp = array[firstIndex];
   array[firstIndex] = array[secondIndex];
   array[secondIndex] = temp;
+}
+
+/*********************/
+/** MAX ARRAY VALUE **/
+/*********************/
+int max_value(const int array[], const int size) {
+ int maxValue = array[0];
+
+  for(int i = 0; i < size; ++i) {
+    if(array[i] > maxValue) {
+      maxValue = array[i];
+    }
+  }   
+  return maxValue;
 }
