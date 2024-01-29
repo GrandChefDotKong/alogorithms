@@ -16,7 +16,7 @@ int main() {
 
   print_array(testArray, size);
 
-  int result = binary_search(testArray, 7, 11);
+  int result = ternary_search(testArray, 0, 6, 76);
 
   std::cout << "result = " << result << "\n";
 

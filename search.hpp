@@ -1,3 +1,30 @@
+/*****************************/
+/** TERNARY SEARCH ALGORYTHM **/
+/*****************************/
+int ternary_search(const int array[], int begin, int end, const int valueToSearch) {
+  int left = begin + (end - begin) / 3;
+  int right = end - (end - begin) / 3;
+
+  if(valueToSearch == array[right]) {
+    return right;
+  }
+
+  if(valueToSearch == array[left]) {
+    return left;
+  }
+
+  if(begin >= end) {
+    return -1;
+  }
+
+  if(valueToSearch < array[left]) {
+    return ternary_search(array, begin, left-1, valueToSearch);
+  } else if(valueToSearch < array[right]) {
+    return ternary_search(array, left+1, right-1, valueToSearch);
+  } else {
+    return ternary_search(array, right+1, end, valueToSearch);
+  }
+}
 
 /*****************************/
 /** LINEAR SEARCH ALGORYTHM **/
