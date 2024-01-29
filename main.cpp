@@ -16,7 +16,7 @@ int main() {
 
   print_array(testArray, size);
 
-  int result = ternary_search(testArray, 0, 6, 76);
+  int result = jump_search(testArray, 7, 3, -1);
 
   std::cout << "result = " << result << "\n";
 

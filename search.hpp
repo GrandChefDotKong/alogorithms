@@ -1,6 +1,40 @@
-/*****************************/
+/******************************/
+/** JUMP SEARCH ALGORYTHM **/
+/******************************/
+int jump_search(const int array[], const int size, const int jump, const int valueToSearch) {
+  int index = 0, prevIndex = -1;
+
+  while(true) {
+    if(index >= size) {
+      index = size - 1;
+    }
+
+    if(array[index] == valueToSearch) {
+      return index;
+    }
+    
+    if(index == prevIndex) {
+      return -1;
+    }
+
+    prevIndex = index;
+
+    if(array[index] < valueToSearch) {
+      index += jump;
+      continue;
+    }
+
+    index--;
+    
+    if(index < 0) {
+      return -1;
+    }  
+  }
+}
+
+/******************************/
 /** TERNARY SEARCH ALGORYTHM **/
-/*****************************/
+/******************************/
 int ternary_search(const int array[], int begin, int end, const int valueToSearch) {
   int left = begin + (end - begin) / 3;
   int right = end - (end - begin) / 3;
