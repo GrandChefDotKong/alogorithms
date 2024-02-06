@@ -1,9 +1,7 @@
 #include <iostream>
 #include "sorting.hpp"
 #include "search.hpp"
-#include <deque>
-#include <vector>
-#include <string>
+#include "leetcode.hpp"
 #include <algorithm>    // std::sort
 
 void print_array(const int arrayToPrint[], const int size) {
@@ -30,14 +28,13 @@ void print_vector(const std::vector<std::string>& vector) {
   std::cout << std::endl;
 }
 
+
+
 int main() {
 
-  int testArray[7] = {11, 25, 43, 54, 68, 76, 95};
-  const int size = sizeof(testArray)/sizeof(testArray[0]);
+  std::string test = "[]{(){[]()}}";
 
-  print_array(testArray, size);
-
-  int result = interpolation_search(testArray, 7, 76);
+  bool result = valid_parenthese(test);
 
   std::cout << "result = " << result << "\n";
   
