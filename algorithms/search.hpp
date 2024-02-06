@@ -1,6 +1,32 @@
-/******************************/
+
+/************************************/ // work best on uniformly distributed dataset
+/** INTERPOLATION SEARCH ALGORYTHM **/
+/************************************/
+int interpolation_search(const int array[], const int size, const int valueToSearch) {
+  int begin = 0;
+  int end = size-1;
+
+  while(valueToSearch >= array[begin] && valueToSearch <= array[end] && begin <= end) {
+    int probe = (end - begin) * (valueToSearch - array[begin]) / (array[end] - array[begin]) + begin;
+
+    if(array[probe] == valueToSearch) {
+      return probe;
+    }
+
+    if(array[probe] > valueToSearch) {
+      end = probe-1;
+    } else {
+      begin = probe+1;
+    }
+  }
+
+  return -1; 
+}
+
+
+/***************************/
 /** JUMP SEARCH ALGORYTHM **/
-/******************************/
+/***************************/
 int jump_search(const int array[], const int size, const int jump, const int valueToSearch) {
   int index = 0, prevIndex = -1;
 
@@ -73,7 +99,7 @@ int linear_search(const int array[], const int size, const int valueToSearch) {
   return -1;
 }
 
-/**************************************/ // I DON'T GET THE VALUE OF THIS 
+/**************************************/ // I DON'T REALLY GET THE VALUE OF THIS 
 /** SENTINEL LINEAR SEARCH ALGORYTHM **/ // ALGORITHM ...
 /**************************************/
 int sentinel_linear_search(int array[], const int size, const int valueToSearch) {
