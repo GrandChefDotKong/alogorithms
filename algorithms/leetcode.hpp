@@ -6,11 +6,79 @@
 #include <unordered_map>
 #include <algorithm>
 
-////////////////////////////////////////////////////
-/** SOME OFF THE LEETCODE.COM PROBLEMS I SOLVED ***/
-////////////////////////////////////////////////////
+/////////////////////////////////////////////////
+/* SOME OFF THE LEETCODE.COM PROBLEMS I SOLVED */
+/////////////////////////////////////////////////
+
+/*********************************************/
+/** 26. REMOVE DUPLICATES FROM SORTED ARRAY **/
+/*********************************************/
+/*
+  Given an integer array nums sorted in non-decreasing order, 
+  remove the duplicates in-place such that each unique element appears only once. 
+  The relative order of the elements should be kept the same. 
+  Then return the number of unique elements in nums.
+*/
+int removeDuplicates(std::vector<int>& nums) {
+  int temp = 1;
+
+  for(int i = 1; i < nums.size(); i++){
+    if(nums[i] != nums[i - 1]){
+      nums[temp] = nums[i];
+      temp++;
+    }
+  }
+  return temp;
+}
 
 
+/*************************/
+/** 21. MERGE TWO LISTS **/
+/*************************/
+/*
+  You are given the heads of two sorted linked lists list1 and list2.
+  Merge the two lists into one sorted list. 
+  The list should be made by splicing together the nodes of the first two lists.
+  Return the head of the merged linked list.
+  Definition for singly-linked list.
+ */
+struct ListNode {
+  int val;
+  ListNode *next;
+  ListNode() : val(0), next(nullptr) {}
+  ListNode(int x) : val(x), next(nullptr) {}
+  ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
+ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+  
+  if(list1 == nullptr) return list2;
+  if(list2 == nullptr) return list1;
+  
+  ListNode* head = new ListNode();
+  ListNode* temp = head;
+
+  while(list1->next != nullptr && list2->next != nullptr) {
+    
+    if(list1->val < list2->val) {
+      temp->next = list1;
+      list1 = list1->next;
+    } else {
+      temp->next = list2;
+      list2 = list2->next;
+    }
+
+    temp = temp->next;
+  }
+
+  if(list1 == nullptr) {
+    temp->next = list2;
+  } else {
+    temp->next = list1;
+  }
+
+  return head->next;
+}
 
 /***************************/
 /** 20. VALID PARENTHESES **/
