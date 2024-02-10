@@ -6,6 +6,14 @@
 #include <unordered_map>
 #include <algorithm>
 
+struct ListNode {
+  int val;
+  ListNode *next;
+  ListNode() : val(0), next(nullptr) {}
+  ListNode(int x) : val(x), next(nullptr) {}
+  ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
 /////////////////////////////////////////////////
 /* SOME OFF THE LEETCODE.COM PROBLEMS I SOLVED */
 /////////////////////////////////////////////////
@@ -30,8 +38,6 @@ int removeDuplicates(std::vector<int>& nums) {
   }
   return temp;
 }
-
-
 /*************************/
 /** 21. MERGE TWO LISTS **/
 /*************************/
@@ -42,14 +48,6 @@ int removeDuplicates(std::vector<int>& nums) {
   Return the head of the merged linked list.
   Definition for singly-linked list.
  */
-struct ListNode {
-  int val;
-  ListNode *next;
-  ListNode() : val(0), next(nullptr) {}
-  ListNode(int x) : val(x), next(nullptr) {}
-  ListNode(int x, ListNode *next) : val(x), next(next) {}
-};
-
 ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
   
   if(list1 == nullptr) return list2;
@@ -216,6 +214,53 @@ bool isPalindrome(int x) {
   } while( x > 0);
   
   return reverse == temp;
+}
+
+/***********************/
+/** 2. ADD TWO NUMBER **/
+/***********************/
+/*
+  You are given two non-empty linked lists representing two non-negative integers. 
+  The digits are stored in reverse order, and each of their nodes contains a single digit. 
+  Add the two numbers and return the sum as a linked list.
+  You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+  Given an array of integers nums and an integer target, 
+  return indices of the two numbers such that they add up to target.
+  You may assume that each input would have exactly one solution, and you may not use the same element twice.
+  You can return the answer in any order.
+*/
+ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+  ListNode* sum = new ListNode();
+  ListNode* temp = sum;
+  int carryOver = 0;
+
+  while(l1 != nullptr || l2 != nullptr) {
+    int value = carryOver;
+
+    if(l1 != nullptr) {
+      value += l1->val;
+      carryOver += l1->val;
+      l1 = l1->next;         
+    }
+
+    if(l2 != nullptr) {
+      value += l2->val;
+      carryOver += l2->val;
+      l2 = l2->next;         
+    }
+
+    value = value % 10;
+    carryOver /= 10;
+
+    temp->next = new ListNode(value);
+    temp = temp->next;
+  }
+
+  if(carryOver > 0) {
+    temp->next = new ListNode(carryOver);
+  }
+
+  return sum->next;
 }
 
 /****************/
