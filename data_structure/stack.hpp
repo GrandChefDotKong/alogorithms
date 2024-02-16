@@ -45,6 +45,15 @@ class Stack {
       m_top--;
     }
 
+    int peek() {
+      if(this->isEmpty()) {
+        std::cout << "STACK IS EMPTY !";
+        return -1;
+      }
+        
+      return m_items[m_top];
+    }
+
   private:
     int m_items[MAX];
     int m_top; 
