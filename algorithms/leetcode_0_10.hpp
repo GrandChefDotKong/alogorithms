@@ -5,6 +5,7 @@
 #include <map>
 #include <unordered_map>
 #include <algorithm>
+#include <limits.h>
 
 struct ListNode {
   int val;
@@ -172,6 +173,54 @@ public:
     }
 
 };
+/**************************************/
+/** 6. Zigzag Conversion **/
+/**************************************/
+std::string convert(std::string s, int numRows) {
+  if(numRows == 1) {
+    return s;
+  }
+
+  std::string solution = "";
+  int increment = (numRows - 1) * 2;
+  for(int i = 0; i < numRows; ++i) {    
+    for(int j = i; j < s.length(); j += increment) {
+      solution += s[j];
+      if(i > 0 && i < numRows-1 
+      && (j + increment - 2 * i) < s.length()) {
+        solution += s[j+increment - 2 * i];
+      }     
+    }
+  }
+
+  return solution;
+}
+/**************************/
+/** 7. Reverse Integer **/
+/**************************/
+/*
+  Given a signed 32-bit integer x, return x with its digits reversed. 
+  If reversing x causes the value to go outside the signed 32-bit integer range [-231, 231 - 1], then return 0.
+  Assume the environment does not allow you to store 64-bit integers (signed or unsigned).
+*/
+int reverse(int x) {
+  int reverse = 0;
+
+  do {
+    int digit = x % 10; 
+    
+    if((reverse < INT_MIN / 10 || reverse == INT_MIN / 10 && digit < -8) ||
+    (reverse > INT_MAX / 10 || reverse == INT_MAX / 10 && digit > 7)) {
+      return 0;
+    }
+
+    reverse = (reverse * 10) + digit;
+    x = x / 10;
+      
+  } while( x != 0);
+
+  return reverse;
+}
 /**************************/
 /** 9. PALINDROME NUMBER **/
 /**************************/
